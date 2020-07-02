@@ -3,6 +3,10 @@ package com.example.blockmover;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -10,7 +14,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
 {
 
     private MainThread thread;
-    private CharacterSprite characterSprite;
+    private PlayerObject player;
+    private Point playerPoint;
+
     public GameView(Context context)
     {
         super(context);
@@ -18,6 +24,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
         getHolder().addCallback(this);
 
         thread = new MainThread(getHolder(),this);
+
+        player = new PlayerObject(new Rect(100,100,200,200), Color.rgb(100,0,0));
+        playerPoint = new Point(150,150);
+
         setFocusable(true);
     }
 
@@ -25,7 +35,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-        characterSprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.maincharacter));
+
+        //characterSprite.setX(startSprite.getX());
+        //characterSprite.setY(startSprite.getY());
+        //int testX = startSprite.getX();
 
         thread.setRunning(true);
         thread.start();
@@ -54,10 +67,23 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                playerPoint.set((int)event.getX(),(int)event.getY());
+        }
+        return true;
+        //return super.onTouchEvent(event);
+    }
+
     public void update()
     {
         //Handle on screen logic here
-        characterSprite.update();
+        player.update(playerPoint);
     }
 
     @Override
@@ -66,7 +92,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
         super.draw(canvas);
         if (canvas != null)
         {
-            characterSprite.draw(canvas);
+            canvas.drawColor(Color.WHITE);
+
+            player.draw(canvas);
         }
     }
 }

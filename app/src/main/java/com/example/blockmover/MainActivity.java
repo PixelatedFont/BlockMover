@@ -19,13 +19,16 @@ public class MainActivity extends Activity
         //Set fullscreen
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //Disable Title Bar
+        //Disable title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        //Set Screen to Landscape Mode
+        //Set screen to Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        //Set View on screen
+        //Keep screen on
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        //Set view on screen
         setContentView(new GameView(this));
 
     }
