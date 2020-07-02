@@ -7,9 +7,12 @@ public class CharacterSprite
 {
     private Bitmap image;
     private int x,y;
+    private int xVelocity = 10;
+    private int yVelocity = 10;
 
     public CharacterSprite(Bitmap bmp)
     {
+        //Set Image source
         image = bmp;
         //Coordinate
         x = 100;
@@ -25,6 +28,7 @@ public class CharacterSprite
 
     public void update()
     {
-        y++;
+        //Logic of CharacterSprite
+        y += yVelocity;
     }
 }

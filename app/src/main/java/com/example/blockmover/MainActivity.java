@@ -25,7 +25,7 @@ public class MainActivity extends Activity
         //Set Screen to Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        //Set View
+        //Set View on screen
         setContentView(new GameView(this));
 
     }

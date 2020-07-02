@@ -56,6 +56,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
 
     public void update()
     {
+        //Handle on screen logic here
         characterSprite.update();
     }
 
