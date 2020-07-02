@@ -5,6 +5,10 @@ import android.view.SurfaceHolder;
 
 public class MainThread extends Thread
 {
+
+    //Ignore this
+    //This class is what is use to update on screen events
+    //Think of CPU Threads
     private SurfaceHolder surfaceHolder;
     private GameView gameView;
     private boolean running;

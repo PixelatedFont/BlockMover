@@ -12,7 +12,7 @@ import android.view.SurfaceView;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback
 {
-
+    //This class represent the view on the screen
     private MainThread thread;
     private PlayerObject player;
     private Point playerPoint;
@@ -24,9 +24,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
         getHolder().addCallback(this);
 
         thread = new MainThread(getHolder(),this);
-
+        //Create player object here
         player = new PlayerObject(new Rect(100,100,200,200), Color.rgb(100,0,0));
         playerPoint = new Point(150,150);
+
+        //Create game object here
+
 
         setFocusable(true);
     }
