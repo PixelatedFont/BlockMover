@@ -50,15 +50,11 @@ public class MainActivity extends Activity
         gameWidgets.addView(MainUI.getInstance().getButton(2));
         gameWidgets.addView(MainUI.getInstance().getButton(3));
 
-
-
-
         game.addView(gameView);
         game.addView(gameWidgets);
 
-
         //Set view on screen
-        setContentView(game );
+        setContentView(game);
 
     }
 

@@ -76,6 +76,8 @@ public class MainUI
             @Override
             public void onClick(View v) {
                 PressButton(InputKey.Right);
+                gameButtons.get(2).setPressed(true);
+
             }
         });
 

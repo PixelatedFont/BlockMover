@@ -47,10 +47,26 @@ public class PlayerObject implements GameObject
             MainUI.getInstance().PressButton(InputKey.None);
         }
 
+        if (MainUI.getInstance().getButton(1).isPressed() == false)
+        {
+            MainUI.getInstance().PressButton(InputKey.None);
+        }
+
+        if (MainUI.getInstance().getButton(2).isPressed() == false)
+        {
+            MainUI.getInstance().PressButton(InputKey.None);
+        }
+
+        if (MainUI.getInstance().getButton(3).isPressed() == false)
+        {
+            MainUI.getInstance().PressButton(InputKey.None);
+        }
+
         if (key == InputKey.Right)
         {
             point.x += 50;
         }
+        
 
         if (key == InputKey.Left)
         {

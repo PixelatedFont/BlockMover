@@ -14,9 +14,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     //This class represent the view on the screen
     private MainThread thread;
     private PlayerObject player;
-    private InGameObject gameObject;
+    private InGameObject gameObject, gameObject2;
     private Point playerPoint;
-    private Point gameObjectPoint;
+    private Point gameObjectPoint, gameObjectPoint2;
     private MainUI buttonManager;
 
     public GameView(Context context)
@@ -28,14 +28,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
         thread = new MainThread(getHolder(),this);
         //Create player object here
         player = new PlayerObject(new Rect(100,100,200,200), Color.rgb(100,0,0));
-        gameObject = new InGameObject(new Rect(100,100,200,200), Color.rgb(0,100,0), true);
 
-        gameObjectPoint = new Point(100,100);
         playerPoint = new Point(600,600);
 
         //Create game object here
+        gameObject = new InGameObject(new Rect(100,100,200,200), Color.rgb(0,100,0), true);
+        gameObjectPoint = new Point(100,100);
 
-
+        gameObject2 = new InGameObject(new Rect(200, 200, 400, 400), Color.BLACK, false);
+        gameObjectPoint2 = new Point(500,500);
 
         setFocusable(true);
     }
@@ -91,19 +92,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     {
         //Handle on screen logic here
         player.update(playerPoint);
+        gameObject2.update(gameObjectPoint2);
+
         if (gameObject.playerCollide(player))
         {
             gameObjectPoint.x += 100;
             gameObject.update(gameObjectPoint);
         }
 
-
-
     }
 
     @Override
     public void draw(Canvas canvas)
     {
+
+        //Draw here
         super.draw(canvas);
         if (canvas != null)
         {
@@ -111,6 +114,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
 
             player.draw(canvas);
             gameObject.draw(canvas);
+            gameObject2.draw(canvas);
         }
     }
 }
