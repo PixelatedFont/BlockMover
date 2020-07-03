@@ -5,10 +5,13 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import java.util.Timer;
+
 public class PlayerObject implements GameObject
 {
     private Rect rectangle;
     private int color;
+    MainUI manager;
 
     public Rect getRectangle() {
         return rectangle;
@@ -38,5 +41,32 @@ public class PlayerObject implements GameObject
     {
         //left top right bottom
         rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2, point.x + rectangle.width()/2,point.y + rectangle.height()/2);
+        InputKey key = MainUI.getInstance().GetCurrentPress();
+        if (MainUI.getInstance().getButton(0).isPressed() == false)
+        {
+            MainUI.getInstance().PressButton(InputKey.None);
+        }
+
+        if (key == InputKey.Right)
+        {
+            point.x += 50;
+        }
+
+        if (key == InputKey.Left)
+        {
+            point.x -= 50;
+        }
+
+        if (key == InputKey.Up)
+        {
+            point.y -= 50;
+        }
+
+        if (key == InputKey.Down)
+        {
+            point.y += 50;
+        }
     }
+
+
 }

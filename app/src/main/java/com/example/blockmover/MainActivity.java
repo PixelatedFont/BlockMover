@@ -1,13 +1,14 @@
 package com.example.blockmover;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity
 {
@@ -35,8 +36,29 @@ public class MainActivity extends Activity
         Constants.SCREEN_WIDTH = dm.widthPixels;
         Constants.SCREEN_HEIGHT = dm.heightPixels;
 
+        //Create ButtonManager
+
+        //FrameLayout
+        FrameLayout game = new FrameLayout(this);
+        GameView gameView = new GameView(this);
+        RelativeLayout gameWidgets = new RelativeLayout(this);
+
+        MainUI.getInstance().Init(this);
+
+        gameWidgets.addView(MainUI.getInstance().getButton(0));
+        gameWidgets.addView(MainUI.getInstance().getButton(1));
+        gameWidgets.addView(MainUI.getInstance().getButton(2));
+        gameWidgets.addView(MainUI.getInstance().getButton(3));
+
+
+
+
+        game.addView(gameView);
+        game.addView(gameWidgets);
+
+
         //Set view on screen
-        setContentView(new GameView(this));
+        setContentView(game );
 
     }
 

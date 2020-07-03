@@ -1,7 +1,6 @@
 package com.example.blockmover;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -18,6 +17,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     private InGameObject gameObject;
     private Point playerPoint;
     private Point gameObjectPoint;
+    private MainUI buttonManager;
 
     public GameView(Context context)
     {
@@ -81,9 +81,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     {
         switch (event.getAction())
         {
-            case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-                playerPoint.set((int)event.getX(),(int)event.getY());
+
         }
         return true;
         //return super.onTouchEvent(event);
@@ -98,6 +96,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
             gameObjectPoint.x += 100;
             gameObject.update(gameObjectPoint);
         }
+
+
+
     }
 
     @Override
