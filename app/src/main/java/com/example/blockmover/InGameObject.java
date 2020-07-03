@@ -2,30 +2,31 @@ package com.example.blockmover;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 
-public class Obstacle implements GameObject
+public class InGameObject implements GameObject
 {
     private Rect rectangle;
     private int color;
+    private boolean isTouchable = false;
 
-    public Obstacle(Rect rect, int color)
+    public InGameObject(Rect rect, int color, boolean isTouchable)
     {
         this.rectangle = rect;
         this.color = color;
+        this.isTouchable = isTouchable;
     }
 
     public boolean playerCollide(PlayerObject player)
     {
         //if player touches object return true
-        if (rectangle.contains(player.getRectangle().left, player.getRectangle().top)
-            || rectangle.contains(player.getRectangle().right, player.getRectangle().top)
-            || rectangle.contains(player.getRectangle().left, player.getRectangle().bottom)
-            || rectangle.contains(player.getRectangle().right, player.getRectangle().bottom))
+        if (this.isTouchable)
         {
-            return true;
+            return Rect.intersects(rectangle, player.getRectangle());
         }
         else return false;
+
     }
 
     @Override
@@ -37,7 +38,13 @@ public class Obstacle implements GameObject
     }
 
     @Override
-    public void update() {
+    public void update()
+    {
+    }
 
+    public void update(Point point)
+    {
+        //left top right bottom
+        rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2, point.x + rectangle.width()/2,point.y + rectangle.height()/2);
     }
 }

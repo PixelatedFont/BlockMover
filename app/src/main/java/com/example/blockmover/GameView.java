@@ -15,7 +15,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     //This class represent the view on the screen
     private MainThread thread;
     private PlayerObject player;
+    private InGameObject gameObject;
     private Point playerPoint;
+    private Point gameObjectPoint;
 
     public GameView(Context context)
     {
@@ -26,9 +28,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
         thread = new MainThread(getHolder(),this);
         //Create player object here
         player = new PlayerObject(new Rect(100,100,200,200), Color.rgb(100,0,0));
-        playerPoint = new Point(150,150);
+        gameObject = new InGameObject(new Rect(100,100,200,200), Color.rgb(0,100,0), true);
+
+        gameObjectPoint = new Point(100,100);
+        playerPoint = new Point(600,600);
 
         //Create game object here
+
 
 
         setFocusable(true);
@@ -87,6 +93,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     {
         //Handle on screen logic here
         player.update(playerPoint);
+        if (gameObject.playerCollide(player))
+        {
+            gameObjectPoint.x += 100;
+            gameObject.update(gameObjectPoint);
+        }
     }
 
     @Override
@@ -98,6 +109,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
             canvas.drawColor(Color.WHITE);
 
             player.draw(canvas);
+            gameObject.draw(canvas);
         }
     }
 }
