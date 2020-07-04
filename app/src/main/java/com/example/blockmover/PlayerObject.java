@@ -13,6 +13,8 @@ public class PlayerObject implements GameObject
     private int color;
     MainUI manager;
 
+    public boolean rightKeyPressed;
+
     public Rect getRectangle() {
         return rectangle;
     }
@@ -37,50 +39,44 @@ public class PlayerObject implements GameObject
 
     }
 
+    public void setPoint(int pointX, int pointY)
+    {
+        rectangle.set(pointX - rectangle.width()/2, pointY - rectangle.height()/2, pointX + rectangle.width()/2,pointY + rectangle.height()/2);
+
+    }
+
+
     public void update(Point point)
     {
         //left top right bottom
         rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2, point.x + rectangle.width()/2,point.y + rectangle.height()/2);
         InputKey key = MainUI.getInstance().GetCurrentPress();
-        if (MainUI.getInstance().getButton(0).isPressed() == false)
-        {
-            MainUI.getInstance().PressButton(InputKey.None);
-        }
-
-        if (MainUI.getInstance().getButton(1).isPressed() == false)
-        {
-            MainUI.getInstance().PressButton(InputKey.None);
-        }
-
-        if (MainUI.getInstance().getButton(2).isPressed() == false)
-        {
-            MainUI.getInstance().PressButton(InputKey.None);
-        }
-
-        if (MainUI.getInstance().getButton(3).isPressed() == false)
-        {
-            MainUI.getInstance().PressButton(InputKey.None);
-        }
 
         if (key == InputKey.Right)
         {
-            point.x += 50;
+            point.x = point.x + Constants.xVelocity;
+            MainUI.getInstance().PressButton(InputKey.None);
         }
-        
 
         if (key == InputKey.Left)
         {
-            point.x -= 50;
+            point.x = point.x + Constants.xVelocity;
+            MainUI.getInstance().PressButton(InputKey.None);
+
         }
 
         if (key == InputKey.Up)
         {
-            point.y -= 50;
+            point.y = point.y + Constants.yVelocity;
+            MainUI.getInstance().PressButton(InputKey.None);
+
         }
 
         if (key == InputKey.Down)
         {
-            point.y += 50;
+            point.y = point.y + Constants.yVelocity;
+            MainUI.getInstance().PressButton(InputKey.None);
+
         }
     }
 

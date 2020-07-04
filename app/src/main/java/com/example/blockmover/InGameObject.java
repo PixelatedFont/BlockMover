@@ -11,6 +11,13 @@ public class InGameObject implements GameObject
     private int color;
     private boolean isTouchable = false;
 
+
+
+    public Rect getRectangle()
+    {
+        return rectangle;
+    }
+
     public InGameObject(Rect rect, int color, boolean isTouchable)
     {
         this.rectangle = rect;
@@ -18,16 +25,61 @@ public class InGameObject implements GameObject
         this.isTouchable = isTouchable;
     }
 
-    public boolean playerCollide(PlayerObject player)
+    public String playerCollide(PlayerObject player)
+    {
+        //if player touches object return true
+        //System.out.println("Colliding");
+        String collision;
+
+        Rect oldPos = player.getRectangle();
+
+        if (Rect.intersects(rectangle, player.getRectangle()))
+        {
+            if (Constants.xVelocity > 0)
+            {
+                return "right";
+            }
+
+            if (Constants.xVelocity < 0 )
+            {
+                return "left";
+            }
+
+            if (Constants.yVelocity > 0 )
+            {
+                return "bottom";
+            }
+
+            if (Constants.yVelocity < 0 )
+            {
+                return "top";
+            }
+        }
+
+
+
+
+
+        return "null";
+
+
+    }
+
+
+
+    public boolean playerCollideTest(PlayerObject player)
     {
         //if player touches object return true
         if (this.isTouchable)
         {
-            return Rect.intersects(rectangle, player.getRectangle());
+                return true;
+
         }
         else return false;
-
     }
+
+
+
 
     @Override
     public void draw(Canvas canvas)
@@ -46,5 +98,16 @@ public class InGameObject implements GameObject
     {
         //left top right bottom
         rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2, point.x + rectangle.width()/2,point.y + rectangle.height()/2);
+
+        //hitBox(this.rectangle);
     }
+
+    public void setCoordinate(int PointX, int PointY)
+    {
+        //left top right bottom
+        rectangle.set(PointX - rectangle.width()/2, PointY - rectangle.height()/2, PointX + rectangle.width()/2,PointY + rectangle.height()/2);
+
+        //hitBox(this.rectangle);
+    }
+
 }

@@ -60,23 +60,35 @@ public class MainUI
 
         gameButtons.get(0).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                Constants.yVelocity = 0;
+                Constants.xVelocity = -100;
                 PressButton(InputKey.Left);
+                //System.out.println(instance.currentPress.toString());
             }
         });
 
         gameButtons.get(1).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                Constants.xVelocity = 0;
+                Constants.yVelocity = -100;
                 PressButton(InputKey.Up);
+
+                //System.out.println(instance.currentPress.toString());
+
             }
         });
 
         gameButtons.get(2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Constants.yVelocity = 0;
+                Constants.xVelocity = 100;
                 PressButton(InputKey.Right);
-                gameButtons.get(2).setPressed(true);
+                //System.out.println(instance.currentPress.toString());
 
             }
         });
@@ -84,7 +96,11 @@ public class MainUI
         gameButtons.get(3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Constants.xVelocity = 0;
+                Constants.yVelocity = 100;
                 PressButton(InputKey.Down);
+                //System.out.println(instance.currentPress.toString());
+
             }
         });
         this.mainActivity = main;
@@ -102,11 +118,19 @@ public class MainUI
 
     public void PressButton(InputKey key)
     {
-        currentPress = key;
+        this.currentPress = key;
 
     }
     public InputKey GetCurrentPress(){
         return this.currentPress;
+    }
+
+    public void stopKey(GameButton button)
+    {
+        if (button.isPressed() == false)
+        {
+            MainUI.getInstance().PressButton(InputKey.None);
+        }
     }
 
 
