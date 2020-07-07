@@ -1,7 +1,9 @@
 package com.example.blockmover;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
@@ -12,7 +14,7 @@ import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity
 {
-
+    MusicPlayer musicPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -53,9 +55,15 @@ public class MainActivity extends Activity
         game.addView(gameView);
         game.addView(gameWidgets);
 
+        startService(new Intent(MainActivity.this,MusicPlayer.class));
+
+
+
         //Set view on screen
         setContentView(game);
 
     }
+
+
 
 }

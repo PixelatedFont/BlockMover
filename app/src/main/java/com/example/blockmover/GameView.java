@@ -29,6 +29,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
 
         getHolder().addCallback(this);
 
+        Constants.CURRENT_CONTEXT = context;
+
         thread = new MainThread(getHolder(),this);
 
         manager = new SceneManager();
@@ -45,7 +47,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
         //characterSprite.setX(startSprite.getX());
         //characterSprite.setY(startSprite.getY());
         //int testX = startSprite.getX();
+        //Constants.INIT_TIME = System.currentTimeMillis();
 
+        thread = new MainThread(getHolder(),this);
         thread.setRunning(true);
         thread.start();
     }
@@ -70,6 +74,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
             {
                 e.printStackTrace();
             }
+            retry = false;
         }
     }
 
