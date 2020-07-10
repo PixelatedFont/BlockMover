@@ -28,6 +28,7 @@ public class MainThread extends Thread
         running = isRunning;
     }
 
+
     @Override
     public void run() {
         long startTime;

@@ -13,7 +13,8 @@ public class SceneManager
     public SceneManager()
     {
        ACTIVE_SCENE = 0;
-       scenes.add(new GameplayScene());
+       scenes.add(new TutorialStage1());
+       scenes.add(new TutorialStage2());
     }
 
     public void receiveTouch(MotionEvent event)

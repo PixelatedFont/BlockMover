@@ -27,7 +27,7 @@ public class InGameObject implements GameObject
         return rectangle;
     }
 
-    public InGameObject(Rect rect, int color, boolean isTouchable, boolean isMovable)
+    public InGameObject(Rect rect, int color)
     {
         this.rectangle = rect;
         this.color = color;
@@ -39,11 +39,19 @@ public class InGameObject implements GameObject
         Bitmap oneXBlockImg = bitmapF.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.onexblock);
         Bitmap borderBlockImg = bitmapF.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.border);
 
+        Bitmap portal_img_1 = bitmapF.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.portal_1);
+        Bitmap portal_img_2 = bitmapF.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.portal_2);
+        Bitmap portal_img_3 = bitmapF.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.portal_3);
+        Bitmap portal_img_4 = bitmapF.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.portal_4);
+
+
+
         groundBlock = new Animation(new Bitmap[]{groundBlockImg},2);
         oneXBlock = new Animation(new Bitmap[]{oneXBlockImg},2);
         borderBlock = new Animation(new Bitmap[]{borderBlockImg}, 2);
+        exitPoint = new Animation(new Bitmap[]{portal_img_1, portal_img_2, portal_img_3, portal_img_4}, 0.5f);
 
-        animationM = new AnimationManager(new Animation[]{groundBlock,oneXBlock, borderBlock});
+        animationM = new AnimationManager(new Animation[]{groundBlock,oneXBlock, borderBlock, exitPoint});
 
     }
 
@@ -84,10 +92,16 @@ public class InGameObject implements GameObject
 
         }
 
-
-
-
         return "null";
+    }
+
+    public boolean objectCollide(InGameObject object)
+    {
+        if (Rect.intersects(rectangle,object.getRectangle()))
+        {
+            return true;
+        }
+        return false;
     }
 
 
@@ -163,7 +177,32 @@ public class InGameObject implements GameObject
             animationM.playAnim(2);
         }
 
+        if (index == 3)
+        {
+            animationM.playAnim(3);
+        }
+
         animationM.update();
     }
+
+    public void reAdjust(Point point)
+    {
+        System.out.println("Adjusting");
+        InputKey key = MainUI.getInstance().GetCurrentPress();
+        if (Constants.xVelocity > 0 || Constants.xVelocity < 0)
+        {
+            point.x = point.x + (-1 * Constants.xVelocity);
+            update(point);
+            //MainUI.getInstance().PressButton(InputKey.None);
+        }
+
+        if (Constants.yVelocity > 0 || Constants.yVelocity < 0)
+        {
+            point.y = point.y + (-1 * Constants.yVelocity);
+            update(point);
+            //MainUI.getInstance().PressButton(InputKey.None);
+        }
+    }
+
 
 }
