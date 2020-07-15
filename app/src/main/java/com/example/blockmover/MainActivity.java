@@ -55,6 +55,8 @@ public class MainActivity extends Activity
         game.addView(gameView);
         game.addView(gameWidgets);
 
+        //MainUI.getInstance().hideUI();
+
         startService(new Intent(MainActivity.this,MusicPlayer.class));
 
 

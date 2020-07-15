@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,7 +18,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     //This class represent the view on the screen
     private MainThread thread;
     private SceneManager manager;
-
+    //private MediaPlayer mediaPlayer;
     int pointX = 1000;
     int pointY = 300;
     int col = 10;

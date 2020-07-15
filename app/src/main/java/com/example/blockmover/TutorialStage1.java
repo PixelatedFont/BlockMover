@@ -70,9 +70,7 @@ public class TutorialStage1 implements Scene
             PointY += 100;
         }
 
-        mediaPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.moderato);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+
 
 
 
@@ -168,9 +166,6 @@ public class TutorialStage1 implements Scene
                     e.printStackTrace();
                 }
                 SceneManager.ACTIVE_SCENE = 1;
-                mediaPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.objection);
-                mediaPlayer.setLooping(true);
-                mediaPlayer.start();
             }
 
         }
@@ -221,9 +216,8 @@ public class TutorialStage1 implements Scene
     @Override
     public void terminate()
     {
-        mediaPlayer.release();
         mediaPlayer.stop();
-        SceneManager.ACTIVE_SCENE = 0;
+
     }
 
     @Override

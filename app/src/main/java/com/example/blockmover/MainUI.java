@@ -7,32 +7,28 @@ import java.util.ArrayList;
 
 
 
-public class MainUI
-{
-    private  static MainUI instance;
+public class MainUI {
+    private static MainUI instance;
 
 
     private ArrayList<Button> gameButtons;
-    private  MainActivity mainActivity;
-    private  InputKey currentPress;
+    private MainActivity mainActivity;
+    private InputKey currentPress;
 
-    public static MainUI getInstance()
-    {
+    public static MainUI getInstance() {
         if (instance == null)
             instance = new MainUI();
 
         return instance;
     }
 
-    private MainUI()
-    {
+    private MainUI() {
 
     }
 
-    public void Init(MainActivity main){
+    public void Init(MainActivity main) {
         gameButtons = new ArrayList<>();
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             gameButtons.add(new GameButton(main));
         }
 
@@ -60,8 +56,7 @@ public class MainUI
 
         gameButtons.get(0).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Constants.yVelocity = 0;
                 Constants.xVelocity = -100;
                 PressButton(InputKey.Left);
@@ -71,8 +66,7 @@ public class MainUI
 
         gameButtons.get(1).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Constants.xVelocity = 0;
                 Constants.yVelocity = -100;
                 PressButton(InputKey.Up);
@@ -106,30 +100,34 @@ public class MainUI
         this.mainActivity = main;
     }
 
-    public void addButton(GameButton button)
-    {
+    public void addButton(GameButton button) {
         gameButtons.add(button);
     }
 
-    public Button getButton(int index)
-    {
+    public Button getButton(int index) {
         return gameButtons.get(index);
     }
 
-    public void PressButton(InputKey key)
-    {
+    public void PressButton(InputKey key) {
         this.currentPress = key;
 
     }
-    public InputKey GetCurrentPress(){
+
+    public InputKey GetCurrentPress() {
         return this.currentPress;
     }
 
-    public void stopKey(GameButton button)
-    {
-        if (button.isPressed() == false)
-        {
+    public void stopKey(GameButton button) {
+        if (button.isPressed() == false) {
             MainUI.getInstance().PressButton(InputKey.None);
+        }
+    }
+
+    public void hideUI()
+    {
+        for (int i = 0; i < gameButtons.size(); i++)
+        {
+            gameButtons.get(i).setVisibility(View.INVISIBLE);
         }
     }
 

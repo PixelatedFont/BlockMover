@@ -57,7 +57,6 @@ public class TutorialStage2 implements Scene
 
 
 
-
     }
 
     @Override
